@@ -1,0 +1,2 @@
+# g-blog
+personal log
