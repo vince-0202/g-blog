@@ -1,32 +1,38 @@
 package bootstrap
 
 import (
+	"fmt"
+
 	"github.com/gin-gonic/gin"
 	"github.com/vince-0202/g-blog/client/pkg/blog"
+	"github.com/vince-0202/g-blog/client/pkg/config"
+	"github.com/vince-0202/g-blog/client/pkg/logger"
 )
 
 type Option func(*gin.Engine)
 
 type Server struct {
-	Server   *gin.Engine
-	Options  []Option
-	Port     int
-	LogLevel string
+	Server  *gin.Engine
+	Options []Option
+	Port    int
 }
 
 type ClientOptions struct {
-	Port     int
-	LogLevel string
+	Port int
 }
 
-func NewServer(options ClientOptions) Server {
+func NewServer(options ClientOptions) (*Server, error) {
 
-	clent := Server{
-		Port:     options.Port,
-		LogLevel: options.LogLevel,
+	client := &Server{
+		Port: options.Port,
 	}
 
-	return clent
+	if err := logger.InitLogger(config.DefaultLogConfig()); err != nil {
+		fmt.Printf("init logger failed, err:%v\n", err)
+		return nil, err
+	}
+
+	return client, nil
 }
 
 func (s *Server) Include(opts ...Option) {
@@ -35,7 +41,10 @@ func (s *Server) Include(opts ...Option) {
 
 func (s *Server) InitSrver() {
 
+	gin.SetMode(gin.ReleaseMode)
 	s.Server = gin.New()
+
+	s.Server.Use(logger.GinLogger(logger.Logger), logger.GinRecovery(logger.Logger, true))
 
 	s.Include(blog.Routers)
 

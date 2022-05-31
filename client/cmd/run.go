@@ -9,6 +9,7 @@ import (
 
 	"github.com/spf13/cobra"
 	"github.com/vince-0202/g-blog/client/bootstrap"
+	"go.uber.org/zap"
 )
 
 var (
@@ -23,12 +24,17 @@ var runCmd = &cobra.Command{
 	You should give a port which will the client server start,make sure this port is unused by other application.`,
 	RunE: func(cmd *cobra.Command, args []string) error {
 
-		s := bootstrap.NewServer(clientOptions)
+		s, err := bootstrap.NewServer(clientOptions)
+		if err != nil {
+			return err
+		}
 
 		s.InitSrver()
 
+		zap.L().Info("start g-blog client", zap.Int("port", s.Port))
 		if err := s.Server.Run(":" + strconv.Itoa(s.Port)); err != nil {
-			// fmt.Println("startup service failed, err:%v\n", err)
+			zap.L().Error("startup service failed", zap.String("err", err.Error()))
+			return err
 		}
 		return nil
 	},
