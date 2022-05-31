@@ -13,3 +13,17 @@
 
 # Dependency directories (remove the comment below to include it)
 # vendor/
+
+# Intellij
+*.iml
+.idea/
+.run/
+# Visual Studio Code
+.vscode/
+# Eclipse artifacts
+.project
+.pydevproject
+# git history files
+.history_rewritten_*
+#bin file
+/bin
