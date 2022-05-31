@@ -12,13 +12,13 @@ func TestNewServer(t *testing.T) {
 	tests := []struct {
 		name string
 		args args
-		want Server
+		want *Server
 	}{
 		{name: "new server with port",
 			args: args{
 				options: ClientOptions{Port: 1234},
 			},
-			want: Server{Port: 1234},
+			want: &Server{Port: 1234},
 		},
 	}
 	for _, tt := range tests {
