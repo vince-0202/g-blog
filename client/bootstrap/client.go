@@ -22,7 +22,6 @@ type ClientOptions struct {
 func NewServer(options ClientOptions) Server {
 
 	clent := Server{
-		Server:   gin.New(),
 		Port:     options.Port,
 		LogLevel: options.LogLevel,
 	}
@@ -35,6 +34,8 @@ func (s *Server) Include(opts ...Option) {
 }
 
 func (s *Server) InitSrver() {
+
+	s.Server = gin.New()
 
 	s.Include(blog.Routers)
 

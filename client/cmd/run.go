@@ -5,7 +5,6 @@ Copyright © 2022 NAME HERE <EMAIL ADDRESS>
 package cmd
 
 import (
-	"fmt"
 	"strconv"
 
 	"github.com/spf13/cobra"
@@ -29,7 +28,7 @@ var runCmd = &cobra.Command{
 		s.InitSrver()
 
 		if err := s.Server.Run(":" + strconv.Itoa(s.Port)); err != nil {
-			fmt.Println("startup service failed, err:%v\n", err)
+			// fmt.Println("startup service failed, err:%v\n", err)
 		}
 		return nil
 	},
