@@ -1,5 +1,5 @@
 .PHONY: build
-build-client:
+build:
 	@go build -o ./bin/ github.com/vince-0202/g-blog/client/
 
 .PHONY: test
