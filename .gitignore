@@ -27,3 +27,5 @@
 .history_rewritten_*
 #bin file
 /bin
+#test log file
+/log
