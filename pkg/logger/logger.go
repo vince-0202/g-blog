@@ -11,7 +11,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/natefinch/lumberjack"
-	"github.com/vince-0202/g-blog/client/pkg/config"
+	"github.com/vince-0202/g-blog/pkg/config"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 )

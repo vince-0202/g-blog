@@ -3,6 +3,8 @@ package bootstrap
 import (
 	"reflect"
 	"testing"
+
+	"github.com/vince-0202/g-blog/pkg/environment"
 )
 
 func TestNewServer(t *testing.T) {
@@ -18,7 +20,7 @@ func TestNewServer(t *testing.T) {
 			args: args{
 				options: ClientOptions{Port: 1234},
 			},
-			want: &Server{Port: 1234},
+			want: &Server{Port: 1234, Env: environment.Env},
 		},
 	}
 	for _, tt := range tests {
