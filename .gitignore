@@ -29,3 +29,5 @@
 /bin
 #test log file
 /logs
+
+*.db
