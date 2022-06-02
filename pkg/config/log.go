@@ -10,7 +10,8 @@ type LogConfig struct {
 
 func DefaultLogConfig() *LogConfig {
 	return &LogConfig{
-		Level:    "debug",
-		Filename: "./logs/zap.log",
+		Level: "debug",
+		//todo: defiend a deafult file path to record log
+		Filename: "/Users/wangsj/go-workspace/vince/g-blog/logs/zap.log",
 	}
 }

@@ -16,7 +16,7 @@ var Env BlogEnv = BlogEnv{}
 
 type BlogEnv struct {
 	Logger *zap.Logger
-	Db     *gorm.DB
+	DB     *gorm.DB
 }
 
 func init() {
@@ -48,9 +48,9 @@ func (e *BlogEnv) initDbConnect() {
 	}
 	zap.L().Info("Connected to test.db success!!")
 
-	e.Db = db
+	e.DB = db
 
-	err = e.Db.AutoMigrate(&document.Document{}, &column.Column{})
+	err = e.DB.AutoMigrate(&document.Document{}, &column.Column{})
 	if err != nil {
 		zap.L().Panic("failed to autoMigrate database", zap.Error(err))
 	}
