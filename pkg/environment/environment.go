@@ -20,7 +20,10 @@ type BlogEnv struct {
 }
 
 func init() {
-	Env.initEnv()
+	err := Env.initEnv()
+	if err != nil {
+		fmt.Printf("init g-blog evnironment failed, err:%v\n", err)
+	}
 }
 
 func (e *BlogEnv) initEnv() error {
@@ -41,11 +44,14 @@ func (e *BlogEnv) initEnv() error {
 func (e *BlogEnv) initDbConnect() {
 	db, err := gorm.Open(sqlite.Open("test.db"), &gorm.Config{})
 	if err != nil {
-		zap.L().Panic("failed to connect database")
+		zap.L().Panic("failed to connect database", zap.Error(err))
 	}
 	zap.L().Info("Connected to test.db success!!")
 
 	e.Db = db
 
-	e.Db.AutoMigrate(&document.Document{}, &column.Column{})
+	err = e.Db.AutoMigrate(&document.Document{}, &column.Column{})
+	if err != nil {
+		zap.L().Panic("failed to autoMigrate database", zap.Error(err))
+	}
 }
