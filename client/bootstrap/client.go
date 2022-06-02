@@ -4,17 +4,20 @@ import (
 	"fmt"
 
 	"github.com/gin-gonic/gin"
-	"github.com/vince-0202/g-blog/client/pkg/blog"
+	"go.uber.org/zap"
+
 	"github.com/vince-0202/g-blog/client/pkg/config"
 	"github.com/vince-0202/g-blog/client/pkg/logger"
-)
 
-type Option func(*gin.Engine)
+	"gorm.io/driver/sqlite"
+	"gorm.io/gorm"
+)
 
 type Server struct {
 	Server  *gin.Engine
 	Options []Option
 	Port    int
+	Db      *gorm.DB
 }
 
 type ClientOptions struct {
@@ -46,9 +49,27 @@ func (s *Server) InitSrver() {
 
 	s.Server.Use(logger.GinLogger(logger.Logger), logger.GinRecovery(logger.Logger, true))
 
-	s.Include(blog.Routers)
+	s.initHttpServer()
+	s.initDbConnect()
+
+}
+
+func (s *Server) initHttpServer() {
+
+	s.InitRoute()
 
 	for _, v := range s.Options {
 		v(s.Server)
 	}
+
+}
+
+func (s *Server) initDbConnect() {
+	db, err := gorm.Open(sqlite.Open("test.db"), &gorm.Config{})
+	if err != nil {
+		zap.L().Panic("failed to connect database")
+	}
+	zap.L().Info("Connected to test.db success!!")
+
+	s.Db = db
 }
