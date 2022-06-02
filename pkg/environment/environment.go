@@ -3,9 +3,9 @@ package environment
 import (
 	"fmt"
 
-	"github.com/vince-0202/g-blog/client/pkg/config"
 	"github.com/vince-0202/g-blog/model/column"
 	"github.com/vince-0202/g-blog/model/document"
+	"github.com/vince-0202/g-blog/pkg/config"
 	"github.com/vince-0202/g-blog/pkg/logger"
 	"go.uber.org/zap"
 	"gorm.io/driver/sqlite"
@@ -47,6 +47,5 @@ func (e *BlogEnv) initDbConnect() {
 
 	e.Db = db
 
-	// 迁移 schema
 	e.Db.AutoMigrate(&document.Document{}, &column.Column{})
 }
