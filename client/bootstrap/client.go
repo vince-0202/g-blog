@@ -35,6 +35,8 @@ func (s *Server) InitSrver() {
 
 	gin.SetMode(gin.ReleaseMode)
 	s.Server = gin.New()
+	s.Server.LoadHTMLGlob("tem/*")
+	s.Server.Static("assets", "./assets")
 
 	s.Server.Use(logger.GinLogger(logger.Logger), logger.GinRecovery(logger.Logger, true))
 
