@@ -3,6 +3,7 @@ package environment
 import (
 	"fmt"
 
+	"github.com/vince-0202/g-blog/model/admin"
 	"github.com/vince-0202/g-blog/model/column"
 	"github.com/vince-0202/g-blog/model/document"
 	"github.com/vince-0202/g-blog/pkg/config"
@@ -15,8 +16,9 @@ import (
 var Env BlogEnv = BlogEnv{}
 
 type BlogEnv struct {
-	Logger *zap.Logger
-	DB     *gorm.DB
+	Logger     *zap.Logger
+	DB         *gorm.DB
+	BlogConfig *BlogConfigEnv
 }
 
 func init() {
@@ -24,6 +26,14 @@ func init() {
 	if err != nil {
 		fmt.Printf("init g-blog evnironment failed, err:%v\n", err)
 	}
+}
+
+func (e *BlogEnv) Author() admin.Author {
+	return *e.BlogConfig.author
+}
+
+func (e *BlogEnv) BlogInfo() admin.BlogConfig {
+	return *e.BlogConfig.blogInfo
 }
 
 func (e *BlogEnv) initEnv() error {
@@ -38,6 +48,10 @@ func (e *BlogEnv) initEnv() error {
 	e.initDbConnect()
 	zap.L().Info("Initialized g-blog DB Conection in the BlogEnv!!!")
 
+	e.BlogConfig = NewBlogConfigEnv()
+
+	e.BlogConfig.Init()
+
 	return nil
 }
 
@@ -50,7 +64,12 @@ func (e *BlogEnv) initDbConnect() {
 
 	e.DB = db
 
-	err = e.DB.AutoMigrate(&document.Document{}, &column.Column{})
+	err = e.DB.AutoMigrate(
+		&document.Document{},
+		&column.Column{},
+		&admin.Author{},
+		&admin.BlogConfig{},
+	)
 	if err != nil {
 		zap.L().Panic("failed to autoMigrate database", zap.Error(err))
 	}
