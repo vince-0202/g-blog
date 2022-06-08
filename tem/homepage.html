@@ -5,9 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="renderer" content="webkit">
     <meta name="viewport" content="width=device-width" />
-    <title>wsj个人博客</title>
-	<meta name="keywords" content="个人博客，个人网站，个人博客模板，好看的个人博客">
-	<meta name="description" content="个人博客搭建，个人博客免费建站，个人博客网站html源码，个人博客网站制作模板，源码下载，织梦，前端，java，PHP模板源码分享">
+    <title>{{.auth.Name}}个人博客</title>
+	<meta name="keywords" content="个人博客，个人网站">
+	<meta name="description" content="个人博客">
     <link href="../assets/layui/css/layui.css" rel="stylesheet" type="text/css">
     <link href="../assets/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="../assets/css/index_style.css" rel="stylesheet" type="text/css">
@@ -31,8 +31,8 @@
         <div class="fp-tablecell">
             <div class="page1">
                 <div class="nav wow zoomIn" data-wow-duration="2s">
-                    <h1>ZQ-Blog</h1>
-                    <p>只要朝着一个方向努力，一切都会变得得心应手</p>
+                    <h1>{{.auth.Name}}</h1>
+                    <p>{{.info.Greeting}}</p>
                     <a class="layui-btn layui-btn-normal" style="margin-top: 20px" href="article.html">Enter Blog</a>
                 </div>
                 <a class="next wow fadeInUp" data-wow-duration="2s" id="next"></a>
@@ -154,9 +154,9 @@
                 <div class="warp-box">
                     <div class="about">
                         <div class="inner">
-                            <h1 class="wow fadeInLeft">ZQ个人博客</h1>
+                            <h1 class="wow fadeInLeft">{{.auth.Name}}个人博客</h1>
                             <p class="wow fadeInRight">                         
-                                   一天很短，开心了就笑，不开心了就过会儿再笑。
+                                  {{.info.Introduce}}
                             </p>
                         </div>
                     </div>
@@ -171,9 +171,9 @@
                     <div class="layui-col-xs12 layui-col-sm6 layui-col-md4">
                         <div class="single-widget about">
                             <div class="footer-logo">
-                                <h2>ZQ个人博客</h2>
+                                <h2>{{.auth.Name}}的个人博客</h2>
                             </div>
-                            <p>世界那么大，我想去看看</p>
+                            <p> {{.auth.Motto}}</p>
                             <div class="button">
                                 <a href="#" class="btn layui-btn layui-btn-normal">About Me</a>
                             </div>
@@ -195,9 +195,9 @@
                         <div class="single-widget contact">
                             <h2>联系我</h2>
                             <ul class="list">
-                                <li><i class="fa fa-map"></i>地址:深圳市南山区</li>
-                                <li><i class="fa fa-qq"></i>QQ: 1435469178 </li>
-                                <li><i class="fa fa-envelope"></i>邮箱: 1435469178@qq.com</li>
+                                <li><i class="fa fa-map"></i>地址:{{.auth.Address}}</li>
+                                <li><i class="fa fa-qq"></i>微信: {{.auth.WeChatNum}} </li>
+                                <li><i class="fa fa-envelope"></i>邮箱: {{.auth.Email}}</li>
                             </ul>
                         </div>
                     </div>
@@ -208,7 +208,7 @@
             <div class="container">
                 <div class="layui-row">
                     <div class="layui-col-xs12 layui-col-sm12 layui-col-md12 text-center">
-                        <p>Copyright &copy; 2019-2020 ZQ个人博客 All Rights Reserved V.5.1.3 粤ICP备1231100号</p>
+                        <p>Copyright &copy; 2019-2020 {{.auth.Name}}个人博客 All Rights Reserved V.5.1.3 粤ICP备1231100号</p>
                     </div>
                 </div>
             </div>
