@@ -29,5 +29,6 @@
 /bin
 #test log file
 /logs
+/assets/image/upload
 
 *.db
