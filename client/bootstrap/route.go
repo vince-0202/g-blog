@@ -6,7 +6,6 @@ import (
 	"github.com/vince-0202/g-blog/client/pkg/column"
 	"github.com/vince-0202/g-blog/client/pkg/document"
 	"github.com/vince-0202/g-blog/client/pkg/homepage"
-	"github.com/vince-0202/g-blog/client/pkg/image"
 )
 
 type Option func(*gin.Engine)
@@ -17,6 +16,5 @@ func (s *Server) InitRoute() {
 		homepage.Routers,
 		column.Routers,
 		article.Routers,
-		image.Routers,
 	)
 }
