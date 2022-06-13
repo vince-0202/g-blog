@@ -28,12 +28,19 @@ func init() {
 	}
 }
 
-func (e *BlogEnv) Author() admin.Author {
-	return *e.BlogConfig.author
+func (e *BlogEnv) IsFirstDeploy() bool {
+	if e.Author() == nil && e.BlogInfo() == nil {
+		return true
+	}
+	return false
 }
 
-func (e *BlogEnv) BlogInfo() admin.BlogConfig {
-	return *e.BlogConfig.blogInfo
+func (e *BlogEnv) Author() *admin.Author {
+	return e.BlogConfig.author
+}
+
+func (e *BlogEnv) BlogInfo() *admin.BlogConfig {
+	return e.BlogConfig.blogInfo
 }
 
 func (e *BlogEnv) initEnv() error {
