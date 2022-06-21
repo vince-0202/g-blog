@@ -10,6 +10,14 @@ import (
 
 func homePage(c *gin.Context) {
 
+	if environment.Env.IsFirstDeploy() {
+		c.HTML(
+			http.StatusOK, "notInit.html",
+			gin.H{},
+		)
+		return
+	}
+
 	//list top 3 column by hot
 
 	top3Column := make([]column.Column, 3)
@@ -26,4 +34,5 @@ func homePage(c *gin.Context) {
 			"column": top3Column,
 		},
 	)
+
 }

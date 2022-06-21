@@ -34,8 +34,8 @@ to quickly create a Cobra application.`,
 
 		s.InitSrver()
 
-		zap.L().Info("start g-blog client", zap.Int("port", s.Port))
-		if err := s.Server.Run(":" + strconv.Itoa(s.Port)); err != nil {
+		zap.L().Info("start g-blog client", zap.Int("port", s.HttpConfig().Port))
+		if err := s.HttpServer().Run(":" + strconv.Itoa(s.HttpConfig().Port)); err != nil {
 			zap.L().Error("startup service failed", zap.String("err", err.Error()))
 			return err
 		}

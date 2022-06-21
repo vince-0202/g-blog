@@ -41,7 +41,6 @@ func (bce *BlogConfigEnv) Init() {
 func (bce *BlogConfigEnv) initAuthor() {
 	Env.DB.First(bce.author)
 	if bce.author != nil {
-		// bce.author = admin.DefaultAuthor()
 		zap.L().Info("Ihis G-Blog's author info", zap.String("author name", bce.author.Name))
 	}
 
@@ -52,7 +51,6 @@ func (bce *BlogConfigEnv) initAuthor() {
 func (bce *BlogConfigEnv) initBlogConfig() {
 	Env.DB.First(bce.blogInfo)
 	if bce.blogInfo != nil {
-		// bce.blogInfo = admin.DefaultBlogConfig()
 		zap.L().Info("Ihis G-Blog's config info", zap.String("blog name", bce.blogInfo.Name))
 	}
 
